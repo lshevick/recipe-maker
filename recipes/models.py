@@ -15,6 +15,7 @@ class Recipe(models.Model):
     cook_time = models.IntegerField()
     yield_amount = models.IntegerField()
     yield_type = models.CharField(max_length=255)
+    cook_temp = models.IntegerField()
 
     def __str__(self):
         return self.name
