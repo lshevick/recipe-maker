@@ -9,7 +9,7 @@ from recipes.models import Recipe
 
 class Step(models.Model):
     text = models.TextField(unique=False, blank=False, max_length=900)
-    recipe = models.ForeignKey(Recipe, on_delete=CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, blank=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
 
     def __str__(self):

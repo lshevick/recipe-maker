@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'ingredients.apps.IngredientsConfig',
     'recipes.apps.RecipesConfig',
     'frontend.apps.FrontendConfig',
+    'steps.apps.StepsConfig',
 ]
 
 
@@ -159,5 +160,5 @@ AUTH_USER_MODEL = 'accounts.User'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# MEDIA_URL = (os.path.join(BASE_DIR, 'frontend/static/build/static'),)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
