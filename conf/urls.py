@@ -24,4 +24,5 @@ urlpatterns = [
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     path('accounts/', include('allauth.urls')),
     path('api/v1/', include('api.urls', namespace='spi_v1')),
+    path('', include('frontend.urls', namespace='frontend')),
 ]
