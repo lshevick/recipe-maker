@@ -16,6 +16,8 @@ class Recipe(models.Model):
     yield_amount = models.IntegerField()
     yield_type = models.CharField(max_length=255)
     cook_temp = models.IntegerField()
+    cook_unit = models.CharField(max_length=255, default='F')
+    notes = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return self.name

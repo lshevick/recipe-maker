@@ -61,7 +61,7 @@ const RegisterForm = () => {
           />
           <input
           className="my-2 p-1 rounded-sm"
-            type="text"
+            type="email"
             name="email"
             id="email"
             value={state.email}

@@ -6,4 +6,4 @@ class StepSerializer(serializers.ModelSerializer):
     username = serializers.ReadOnlyField(source='user.username')
     class Meta:
         model = Step
-        field = '__all__'
+        fields = '__all__'
