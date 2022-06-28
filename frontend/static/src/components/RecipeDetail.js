@@ -15,6 +15,7 @@ const RecipeDetail = () => {
       throw new Error("Network response not ok");
     }
     const json = await response.json();
+    console.log(json);
     setDetail(json);
   };
 
@@ -23,14 +24,15 @@ const RecipeDetail = () => {
   }, [])
 
   const detailView = (
-    <div>
+    <div className="w-1/2">
+        <h1>{detail.name}</h1>
         <img src={detail.image} alt="detail" />
     </div>
   )
 
   return (
     <>
-      <div>
+      <div className="pt-16 flex flex-col items-center justify-start">
         {detailView}
       </div>
     </>

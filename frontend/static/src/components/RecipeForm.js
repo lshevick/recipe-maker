@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Cookies from "js-cookie";
+import StepForm from "./StepForm";
 
 const defaultState = {
   name: "",
@@ -214,11 +215,7 @@ const RecipeForm = () => {
           </div>
         </form>
 
-            <form id="step-form">
-                <div>
-                    <input type="text" />
-                </div>
-            </form>
+        <StepForm/>
 
           <div className="w-5/6 mx-auto flex justify-end">
             <button

@@ -23,9 +23,12 @@ const RecipeList = () => {
 //   }, []);
 
   const recipeList = recipes.map((recipe) => (
-    <li key={recipe.id} className="w-1/3 bg-stone-200 mx-2">
+    <li key={recipe.id} className="w-1/3 mx-2">
       <Link to={`/recipes/${recipe.id}`}>
-      <img src={recipe.image} alt="background recipe" />
+        <div className="relative h-1/2 overflow-hidden">
+        <div className="absolute z-10 left-0 translate-y-40 w-full h-full transition-all hover:translate-y-0 hover:text-2xl font-bold bg-black text-white rounded-md bg-opacity-50">{recipe.name}</div>
+      <img src={recipe.image} alt="background recipe" className="-translate-y-28" />
+        </div>
       </Link>
     </li>
   ));
@@ -34,7 +37,7 @@ const RecipeList = () => {
     <>
       <div className="relative pt-16">
         <ul className="flex flex-col items-start justify-between">
-          <li className="p-5 my-2 flex flex-col items-start">
+          <li className="p-5 my-2 flex flex-col items-start overflow-hidden">
             <h2>Recipes</h2>
             <ul className="flex">{recipeList}</ul>
           </li>

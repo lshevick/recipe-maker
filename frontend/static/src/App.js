@@ -32,7 +32,7 @@ function App() {
   return (
     <div className="App">
       <Nav isAuth={isAuth} />
-      <div className="flex">
+      <div className="flex overflow-hidden">
         <Homescreen />
         <Outlet context={[isAuth, setIsAuth, navigate, recipes]} />
       </div>
