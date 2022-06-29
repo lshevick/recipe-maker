@@ -6,3 +6,11 @@
     border-radius: 20px;
     background: #000A;
 }
+
+.recipe-list {
+    scrollbar-width: 0;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}

@@ -8,27 +8,41 @@ function handleError(err) {
 const RecipeDetail = () => {
   const [detail, setDetail] = useState([]);
   const params = useParams();
+  const [items, setItems] = useState([]);
 
   const getRecipeDetail = async () => {
-    const response = await fetch(`/api/v1/recipes/${params.recipeId}/`).catch(handleError);
+    const response = await fetch(`/api/v1/recipes/${params.recipeId}/`).catch(
+      handleError
+    );
     if (!response.ok) {
       throw new Error("Network response not ok");
     }
     const json = await response.json();
     console.log(json);
     setDetail(json);
-  };
+};
 
   useEffect(() => {
-    getRecipeDetail()
-  }, [])
+    getRecipeDetail();
+  }, []);
+
+
 
   const detailView = (
     <div className="w-1/2">
-        <h1>{detail.name}</h1>
-        <img src={detail.image} alt="detail" />
+      <h1>{detail.name}</h1>
+      <h2>by {detail.username}</h2>
+      <img src={detail.image} alt="detail" />
+      <div>
+        <p>Recipe Type: {detail.category}</p>
+        <p>Prep Time: {detail.prep_time} Minutes</p>
+        <p>Cook Time: {detail.cook_time} Minutes</p>
+      </div>
+      <div className="bg-stone-500">
+        <ul className="flex flex-col"></ul>
+      </div>
     </div>
-  )
+  );
 
   return (
     <>

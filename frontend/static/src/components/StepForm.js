@@ -1,17 +1,18 @@
 import { useState } from "react";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 
-function handleError(err) {
-    console.warn(err)
-}
+// function handleError(err) {
+//   console.warn(err);
+// }
 
-const StepForm = () => {
+const StepForm = ({ setState }) => {
   const [items, setItems] = useState({
     amount: 0,
     unit: "",
     name: "",
+    notes: "",
   });
-  const [itemList, setItemList] = useState([]);
+  const [step, setStep] = useState([]);
   const [notes, setNotes] = useState("");
 
   const handleChange = (e) => {
@@ -21,7 +22,7 @@ const StepForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setItemList((p) => [...p, items]);
+    setStep((p) => [...p, items]);
     setItems({
       amount: 0,
       unit: "",
@@ -29,25 +30,26 @@ const StepForm = () => {
     });
   };
 
-  const addStep = async () => {
-    const data = {
-    
-    }
-    const options = {
-    method: 'POST',
-    headers: {
-    'Content-Type': 'application/json',
-    'X-CSRFToken': Cookies.get('csrftoken'),
-    },
-    body: JSON.stringify(data),
-    }
-    const response = await fetch(`/api/v1/recipe//`, options).catch(handleError);
-    if(!response.ok) {
-    throw new Error('Network response not ok');
-    }
-    const json = await response.json(); 
-    console.log(json)
+  const stepSubmit = (e) => {
+    e.preventDefault();
+    setItems((p) => ({ ...p, notes: notes }));
+    setStep((p) => [...p, items]);
+    setState((p) => ({ ...p, steps: step }));
+    setNotes("");
+    setItems({
+      amount: 0,
+      unit: "",
+      name: "",
+      notes: "",
+    });
   };
+
+  // need to somehow get this form data for the steps into the form for the total recipe.
+  // I added the steps as a JSON field in the recipe model because I couldn't figure out how to get the id for the recipe to do a POST request before the recipe was submitted
+  // SO here we are. I think i need to set the state i have here to the state for the steps property in the recipe state?
+  // Maybe use the useReducer hook?
+  // once you get the steps on the recipe object you can start working on the editing features and then get the lists of recipes displaying properly in the recipe page,
+  // THEN you can start working on frontend stuff
 
   return (
     <>
@@ -94,15 +96,19 @@ const StepForm = () => {
         </button>
       </form>
 
-      <form id="step-form" className="flex justify-center">
+      <form
+        id="step-form"
+        onSubmit={stepSubmit}
+        className="flex justify-center"
+      >
         <div>
           <label htmlFor="notes">Notes</label>
           <input
             type="text"
             name="notes"
             id="notes"
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
+            value={items.notes}
+            onChange={handleChange}
           />
         </div>
         <button
@@ -112,6 +118,20 @@ const StepForm = () => {
           Add Step
         </button>
       </form>
+        <div> 
+            <ul>
+                {items ? step.map(i => (
+                    <li key={i.name} className='flex'>
+                        <p>{i.amount}</p>
+                        <p>{i.unit}</p>
+                        <p>{i.name}</p>
+                    </li>
+                ))
+                :
+                (<p>enter an ingredient</p>)
+                }
+            </ul>
+        </div>
     </>
   );
 };

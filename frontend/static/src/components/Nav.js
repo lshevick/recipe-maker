@@ -43,7 +43,7 @@ const Nav = ({ isAuth }) => {
           </p>
         </div>
         <div className="mx-2">
-          <p className="font-bold text-lg">BATCH MAKER</p>
+          <Link to='/recipes' className="font-bold text-lg">BATCH MAKER</Link>
         </div>
         <div className="mx-2">{isAuth ? userView : guestView}</div>
       </nav>
