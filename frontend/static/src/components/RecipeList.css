@@ -1,0 +1,8 @@
+.recipe-thumbnail:hover  .recipe-title {
+    /* bottom: 25%; */
+    /* right: 25%; */
+    font-size: large;
+    padding: 1rem;
+    border-radius: 20px;
+    background: #000A;
+}
