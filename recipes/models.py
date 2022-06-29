@@ -1,7 +1,5 @@
-from xmlrpc.client import Boolean
 from django.db import models
 from django.conf import settings
-from django.forms import BooleanField
 
 # Create your models here.
 

@@ -17,12 +17,13 @@ const RecipeList = () => {
     >
       <Link to={`/recipes/${recipe.id}`}>
         <div className="flex items-center justify-center">
-          <div className="recipe-title transition-all absolute bg-black bg-opacity-50 text-white bottom-0 -translate-y-full origin-center rounded-md p-1">
+          <div className="recipe-title absolute bottom-0 bg-black bg-opacity-50 text-white w-full py-3 px-2">
             {recipe.name}
           </div>
           <img
             src={recipe.image}
             alt="background recipe"
+            width='100%'
             className="object-cover"
           />
         </div>
@@ -39,12 +40,13 @@ const RecipeList = () => {
       >
         <Link to={`/recipes/${recipe.id}`}>
           <div className="flex items-center justify-center">
-            <div className="recipe-title transition-all absolute bg-black bg-opacity-50 text-white bottom-0 -translate-y-full origin-center rounded-md p-1">
+            <div className="recipe-title absolute bottom-0 bg-black bg-opacity-50 text-white w-full py-3 px-2">
               {recipe.name}
             </div>
             <img
               src={recipe.image}
               alt="background recipe"
+              width='100%'
               className="object-cover"
             />
           </div>

@@ -55,19 +55,23 @@ const StepForm = ({ setState }) => {
     <>
       <form
         id="ingredient-form"
-        className="bg-stone-100 w-full flex justify-center"
+        className="bg-stone-100 w-full flex justify-center p-3"
         onSubmit={handleSubmit}
       >
-        <div>
+        <div className="flex sm:flex-row flex-col bg-stone-200 p-3 items-start sm:items-center"> 
+        <div className="flex flex-col sm:flex-row">
           <label htmlFor="amount">Amount</label>
           <input
-            type="number"
-            name="amount"
-            id="amount"
-            value={items.amount}
-            onChange={handleChange}
+          className="w-1/2"
+          type="number"
+          name="amount"
+          id="amount"
+          value={items.amount}
+          onChange={handleChange}
           />
+          </div>
           <select
+          className="m-1"
             name="unit"
             id="unit"
             value={items.unit}
@@ -79,44 +83,56 @@ const StepForm = ({ setState }) => {
             <option value="tsp">Teaspoon</option>
           </select>
 
+            <div className="flex flex-col sm:flex-row w-full">
           <label htmlFor="name">Ingredient</label>
           <input
-            type="text"
-            name="name"
-            id="name"
-            value={items.name}
-            onChange={handleChange}
+          className="w-full"
+          type="text"
+          name="name"
+          id="name"
+          value={items.name}
+          onChange={handleChange}
           />
+          </div>
         </div>
+        <div className="flex items-end">
         <button
           type="submit"
-          className="mx-2 font-extrabold border-2 border-green-500 hover:bg-green-500 text-green-500 hover:text-white p-2 rounded transition-all"
-        >
+          className="mx-2 h-1/3 font-extrabold border-2 border-green-500 hover:bg-green-500 text-green-500 hover:text-white p-2 rounded transition-all"
+          >
           +
         </button>
+            </div>
       </form>
 
       <form
         id="step-form"
         onSubmit={stepSubmit}
-        className="flex justify-center"
+        className="flex justify-center bg-stone-300 w-full py-2"
       >
         <div>
           <label htmlFor="notes">Notes</label>
-          <input
+          <textarea
+          className="text-black"
+            rows='5'
+            cols='30'
             type="text"
             name="notes"
             id="notes"
             value={items.notes}
             onChange={handleChange}
-          />
+          >
+            Enter yours steps here
+            </textarea>
         </div>
+        <div className="flex items-end">
         <button
           type="submit"
-          className="mx-2 py-1 px-2 font-bold border-2 border-green-600 hover:bg-green-600 text-green-600 hover:text-white rounded-md transition-all"
-        >
+          className="mx-2 py-1 px-2 h-1/2 font-bold border-2 border-green-600 hover:bg-green-600 text-green-600 hover:text-white rounded-md transition-all"
+          >
           Add Step
         </button>
+            </div>
       </form>
         <div> 
             <ul>
