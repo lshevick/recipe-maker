@@ -98,7 +98,7 @@ const RecipeForm = () => {
                   className=""
                 />
               ) : (
-                <div className="bg-stone-500 w-full h-full flex flex-col sm:absolute top-0 items-center justify-center z-50 p-5 sm:py-20">
+                <div className="bg-stone-500 w-full h-full flex flex-col sm:absolute top-0 items-center justify-center z-50 p-5">
                   <span className="scale-150 text-3xl text-white">+</span>
                   <p className="text-white">add an image</p>
                 </div>
@@ -115,7 +115,7 @@ const RecipeForm = () => {
             <div className="flex flex-col z-30 sm:py-10">
               <label htmlFor="name" className="hidden">Name</label>
               <input
-                className="m-3 p-1 sm:w-1/3"
+                className="m-3 p-1 w-1/3"
                 type="text"
                 name="name"
                 id="name"
@@ -155,7 +155,7 @@ const RecipeForm = () => {
           </div>
 
           <div className="flex flex-wrap w-full bg-stone-200 items-center justify-center">
-            <div className="flex flex-col sm:w-1/3 w-full">
+            <div className="flex flex-col">
               <label htmlFor="category" className="invisible">
                 Category
               </label>
@@ -174,7 +174,7 @@ const RecipeForm = () => {
               </select>
             </div>
 
-            <div className="flex flex-col w-1/4">
+            <div className="flex flex-col w-1/6">
               <label htmlFor="prep_time">Prep Time</label>
               <input
                 className="m-3 p-1"
@@ -185,7 +185,7 @@ const RecipeForm = () => {
                 onChange={handleInput}
               />
             </div>
-            <div className="flex flex-col w-1/4">
+            <div className="flex flex-col w-1/6">
               <label htmlFor="cook_time">Cook Time</label>
               <input
                 className="m-3 p-1"
@@ -196,11 +196,11 @@ const RecipeForm = () => {
                 onChange={handleInput}
               />
             </div>
-            <div className="flex flex-col w-1/4">
+            <div className="flex flex-col w-1/6">
               <label htmlFor="cook_temp">Cook Temp</label>
-              <div className="flex items-center my-3">
+              <div className="flex items-center">
                 <input
-                  className="sm:m-3 p-1 sm:w-1/3 w-full"
+                  className="m-3 p-1 w-1/3"
                   type="number"
                   name="cook_temp"
                   id="cook_temp"
@@ -223,7 +223,7 @@ const RecipeForm = () => {
             <div className="flex w-full items-center justify-center">
               <label htmlFor="yield_amount">This Recipe makes</label>
               <input
-                className="sm:m-3 m-1 p-1 w-1/6"
+                className="m-3 p-1"
                 type="number"
                 name="yield_amount"
                 id="yield_amount"
