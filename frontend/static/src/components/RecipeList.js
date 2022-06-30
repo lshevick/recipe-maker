@@ -17,12 +17,13 @@ const RecipeList = () => {
     >
       <Link to={`/recipes/${recipe.id}`}>
         <div className="flex items-center justify-center">
-          <div className="recipe-title transition-all absolute bg-black bg-opacity-50 text-white bottom-0 -translate-y-full origin-center rounded-md p-1">
+          <div className="recipe-title absolute bg-black bg-opacity-50 text-white w-full py-3 px-2 bottom-0">
             {recipe.name}
           </div>
           <img
             src={recipe.image}
             alt="background recipe"
+            width='100%'
             className="object-cover"
           />
         </div>
@@ -39,12 +40,13 @@ const RecipeList = () => {
       >
         <Link to={`/recipes/${recipe.id}`}>
           <div className="flex items-center justify-center">
-            <div className="recipe-title transition-all absolute bg-black bg-opacity-50 text-white bottom-0 -translate-y-full origin-center rounded-md p-1">
+            <div className="recipe-title absolute bg-black bg-opacity-50 text-white w-full py-3 px-2 bottom-0">
               {recipe.name}
             </div>
             <img
               src={recipe.image}
               alt="background recipe"
+              width='100%'
               className="object-cover"
             />
           </div>
@@ -57,37 +59,37 @@ const RecipeList = () => {
       <div className="relative pt-16 w-screen overflow-x-hidden">
         <ul className="flex flex-col items-start justify-between">
           <li className="recipe-list p-5 my-2 w-screen flex flex-col items-start overflow-y-hidden overflow-x-scroll flex-nowrap">
-            <div className="flex">
+            <div className="flex items-center">
               <h2>Recipes</h2>
-              <span className="w-full absolute translate-y-3 translate-x-28 border-[1px] border-black"></span>
+              <hr className="border-t-2 border-solid border-stone-300 w-screen mx-2" />
             </div>
             <ul className="flex">{recipeList}</ul>
           </li>
           <li className="recipe-list p-5 my-2 w-screen flex flex-col items-start overflow-y-hidden overflow-x-scroll flex-nowrap">
-            <div className="flex">
+            <div className="flex items-center">
               <h2>Public Recipes</h2>
-              <span className="w-full absolute translate-y-3 translate-x-28 border-[1px] border-black"></span>
+              <hr className="border-t-2 border-solid border-stone-300 w-screen mx-2" />
             </div>
             <ul className="flex">{publicRecipes}</ul>
           </li>
           <li className="recipe-list p-5 my-2 w-screen flex flex-col items-start overflow-y-hidden overflow-x-scroll flex-nowrap">
-            <div className="flex">
+            <div className="flex items-center">
               <h2>Public Recipes</h2>
-              <span className="w-full absolute translate-y-3 translate-x-28 border-[1px] border-black"></span>
+              <hr className="border-t-2 border-solid border-stone-300 w-screen mx-2" />
             </div>
             <ul className="flex">{publicRecipes}</ul>
           </li>{" "}
           <li className="recipe-list p-5 my-2 w-screen flex flex-col items-start overflow-y-hidden overflow-x-scroll flex-nowrap">
-            <div className="flex">
+            <div className="flex items-center">
               <h2>Public Recipes</h2>
-              <span className="w-full absolute translate-y-3 translate-x-28 border-[1px] border-black"></span>
+              <hr className="border-t-2 border-solid border-stone-300 w-screen mx-2" />
             </div>
             <ul className="flex">{publicRecipes}</ul>
           </li>{" "}
           <li className="recipe-list p-5 my-2 w-screen flex flex-col items-start overflow-y-hidden overflow-x-scroll flex-nowrap">
-            <div className="flex">
+            <div className="flex items-center">
               <h2>Public Recipes</h2>
-              <span className="w-full absolute translate-y-3 translate-x-28 border-[1px] border-black"></span>
+              <hr className="border-t-2 border-solid border-stone-300 w-screen mx-2" />
             </div>
             <ul className="flex">{publicRecipes}</ul>
           </li>

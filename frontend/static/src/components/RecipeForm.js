@@ -15,6 +15,7 @@ const defaultState = {
   cook_unit: "F",
   notes: "",
   steps: [],
+  directions: [],
 };
 
 function handleError(err) {
@@ -24,6 +25,7 @@ function handleError(err) {
 const RecipeForm = () => {
   const [state, setState] = useState(defaultState);
   const [preview, setPreview] = useState("");
+  const [step, setStep] = useState([]);
 
   const handleImage = (e) => {
     const file = e.target.files[0];
@@ -58,6 +60,7 @@ const RecipeForm = () => {
     formData.append("cook_temp", state.cook_temp);
     console.log(state.steps);
     formData.append("steps", JSON.stringify(state.steps));
+    formData.append('directions', JSON.stringify(state.directions))
 
     const options = {
       method: "POST",
@@ -75,6 +78,7 @@ const RecipeForm = () => {
     const json = await response.json();
     console.log(json);
     setState(defaultState);
+    setStep([]);
   };
 
   return (
@@ -83,9 +87,13 @@ const RecipeForm = () => {
         <form
           id="recipe-form"
           onSubmit={handleSubmit}
-          className="bg-stone-100 flex p-16 w-full flex-wrap justify-center items-center"
+          className="bg-stone-100 flex sm:p-16 pt-16 w-full flex-wrap justify-center items-center"
         >
-          <div className="bg-stone-300 flex flex-col sm:flex-row w-full">
+          <div className="flex justify-start w-full items-center">
+          <h1 className="text-3xl font-bold w-full sm:w-1/3 lg:w-1/6">Basic Info</h1>
+          <hr className="border-t-2 border-solid border-stone-400 w-full" />
+          </div>
+          <div className="flex flex-col sm:flex-row w-full">
             <div className="sm:w-1/3 relative h-full">
               <label htmlFor="image" className="hidden">
                 add an image
@@ -94,11 +102,11 @@ const RecipeForm = () => {
                 <img
                   src={preview}
                   alt="preview mini"
-                  width="80%"
+                  width="100%"
                   className=""
                 />
               ) : (
-                <div className="bg-stone-500 w-full h-full flex flex-col sm:absolute top-0 items-center justify-center z-50 p-5">
+                <div className="bg-stone-500 w-full h-full flex flex-col sm:absolute top-0 items-center justify-center rounded-md z-30 p-5 sm:py-20">
                   <span className="scale-150 text-3xl text-white">+</span>
                   <p className="text-white">add an image</p>
                 </div>
@@ -108,14 +116,14 @@ const RecipeForm = () => {
                 name="image"
                 id="image"
                 onChange={handleImage}
-                className="opacity-0 m-3 p-2 cursor-pointer absolute top-4 z-20"
+                className="opacity-0 m-3 p-2 cursor-pointer absolute top-4 z-30"
               />
             </div>
 
-            <div className="flex flex-col z-30 sm:py-10">
+            <div className="flex flex-col z-50 sm:pb-14 p-0">
               <label htmlFor="name" className="hidden">Name</label>
               <input
-                className="m-3 p-1 w-1/3"
+                className="m-3 p-1 sm:w-1/3"
                 type="text"
                 name="name"
                 id="name"
@@ -127,7 +135,7 @@ const RecipeForm = () => {
                 <div className="flex justify-center">
                   <div className="flex mx-5">
                     <button
-                      className="bg-stone-100 h-6 w-6 rounded-lg"
+                      className="bg-stone-200 h-6 w-6 rounded-lg"
                       type="button"
                       onClick={() =>
                         setState((p) => ({ ...p, is_public: !state.is_public }))
@@ -140,7 +148,7 @@ const RecipeForm = () => {
                 </div>
                 <div className="flex mx-5">
                   <button
-                    className="bg-stone-100 h-6 w-6 rounded-lg"
+                    className="bg-stone-200 h-6 w-6 rounded-lg"
                     type="button"
                     onClick={() =>
                       setState((p) => ({ ...p, is_public: !state.is_public }))
@@ -155,7 +163,7 @@ const RecipeForm = () => {
           </div>
 
           <div className="flex flex-wrap w-full bg-stone-200 items-center justify-center">
-            <div className="flex flex-col">
+            <div className="flex flex-col sm:w-1/3 w-full">
               <label htmlFor="category" className="invisible">
                 Category
               </label>
@@ -174,7 +182,7 @@ const RecipeForm = () => {
               </select>
             </div>
 
-            <div className="flex flex-col w-1/6">
+            <div className="flex flex-col w-1/4">
               <label htmlFor="prep_time">Prep Time</label>
               <input
                 className="m-3 p-1"
@@ -185,7 +193,7 @@ const RecipeForm = () => {
                 onChange={handleInput}
               />
             </div>
-            <div className="flex flex-col w-1/6">
+            <div className="flex flex-col w-1/4">
               <label htmlFor="cook_time">Cook Time</label>
               <input
                 className="m-3 p-1"
@@ -196,11 +204,11 @@ const RecipeForm = () => {
                 onChange={handleInput}
               />
             </div>
-            <div className="flex flex-col w-1/6">
+            <div className="flex flex-col w-1/4">
               <label htmlFor="cook_temp">Cook Temp</label>
-              <div className="flex items-center">
+              <div className="flex items-center my-3">
                 <input
-                  className="m-3 p-1 w-1/3"
+                  className="sm:m-3 p-1 sm:w-1/3 w-full"
                   type="number"
                   name="cook_temp"
                   id="cook_temp"
@@ -223,7 +231,7 @@ const RecipeForm = () => {
             <div className="flex w-full items-center justify-center">
               <label htmlFor="yield_amount">This Recipe makes</label>
               <input
-                className="m-3 p-1"
+                className="sm:m-3 m-1 p-1 w-1/6"
                 type="number"
                 name="yield_amount"
                 id="yield_amount"
@@ -247,7 +255,7 @@ const RecipeForm = () => {
           </div>
         </form>
 
-        <StepForm {...state} setState={setState} />
+        <StepForm {...state} setState={setState} step={step} setStep={setStep} />
 
         <div className="w-5/6 mx-auto flex justify-end">
           <button

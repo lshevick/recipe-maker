@@ -32,6 +32,3 @@ class RecipeStepListAPIView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
-class StepDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Step.objects.all()
-    serializer_class = StepSerializer

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import RecipeListAPIView, RecipeDetailAPIView, RecipeStepListAPIView, StepDetailAPIView
+from .views import RecipeListAPIView, RecipeDetailAPIView, RecipeStepListAPIView
 
 app_name = 'recipes'
 

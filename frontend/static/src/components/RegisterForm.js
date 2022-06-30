@@ -45,7 +45,7 @@ const RegisterForm = () => {
 
   return (
     <>
-      <div className="pt-20 bg-stone-200 h-screen p-5 flex flex-col justify-center items-center">
+      <div className="pt-20 bg-stone-200 h-screen w-full p-5 flex flex-col justify-center items-center">
         <form className='p-10 flex flex-col items-end bg-stone-300 rounded-sm' onSubmit={handleSubmit}>
             <div className="w-full">
             <h1 className="font-bold text-2xl">Register</h1>

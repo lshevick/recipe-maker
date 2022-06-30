@@ -5,15 +5,18 @@ import { useState } from "react";
 //   console.warn(err);
 // }
 
-const StepForm = ({ setState }) => {
+const StepForm = ({ setState, step, setStep }) => {
   const [items, setItems] = useState({
+    id: 1,
     amount: 0,
     unit: "",
     name: "",
-    notes: "",
   });
-  const [step, setStep] = useState([]);
-  const [notes, setNotes] = useState("");
+  // const [step, setStep] = useState([]);
+  const [direction, setDirection] = useState([])
+  const [notes, setNotes] = useState({
+    directions: '',
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,6 +27,7 @@ const StepForm = ({ setState }) => {
     e.preventDefault();
     setStep((p) => [...p, items]);
     setItems({
+      id: items.id,
       amount: 0,
       unit: "",
       name: "",
@@ -32,42 +36,56 @@ const StepForm = ({ setState }) => {
 
   const stepSubmit = (e) => {
     e.preventDefault();
-    setItems((p) => ({ ...p, notes: notes }));
-    setStep((p) => [...p, items]);
-    setState((p) => ({ ...p, steps: step }));
-    setNotes("");
+    // console.log(notes)
+    // setStep((p) => [...p, items]);
+    (step && setState((p) => ({ ...p, steps: step })));
+    setState((p) => ({ ...p, directions: direction }));
+    setNotes({directions: ""});
     setItems({
+      id: items.id,
       amount: 0,
       unit: "",
       name: "",
-      notes: "",
     });
   };
-
-  // need to somehow get this form data for the steps into the form for the total recipe.
-  // I added the steps as a JSON field in the recipe model because I couldn't figure out how to get the id for the recipe to do a POST request before the recipe was submitted
-  // SO here we are. I think i need to set the state i have here to the state for the steps property in the recipe state?
-  // Maybe use the useReducer hook?
-  // once you get the steps on the recipe object you can start working on the editing features and then get the lists of recipes displaying properly in the recipe page,
-  // THEN you can start working on frontend stuff
 
   return (
     <>
       <form
         id="ingredient-form"
-        className="bg-stone-100 w-full flex justify-center"
+        className="bg-stone-100 w-full flex flex-col items-center justify-center p-3"
         onSubmit={handleSubmit}
-      >
+        >
         <div>
-          <label htmlFor="amount">Amount</label>
-          <input
-            type="number"
-            name="amount"
-            id="amount"
-            value={items.amount}
-            onChange={handleChange}
-          />
+          <ul>
+            {items ? (
+              step.map((i) => (
+                <li key={i.name} className="flex">
+                  <p>{i.amount}</p>
+                  <p>{i.unit}</p>
+                  <p>{i.name}</p>
+                </li>
+              ))
+            ) : (
+              <p>enter an ingredient</p>
+            )}
+          </ul>
+        </div>
+
+        <div className="flex">
+        <div className="flex sm:flex-row flex-col bg-stone-200 p-3 items-start sm:items-center">
+          <div className="flex flex-col sm:flex-row">
+            <label htmlFor="amount">Amount</label>
+            <input
+              type="number"
+              name="amount"
+              id="amount"
+              value={items.amount}
+              onChange={handleChange}
+              />
+          </div>
           <select
+            className="m-1"
             name="unit"
             id="unit"
             value={items.unit}
@@ -79,59 +97,59 @@ const StepForm = ({ setState }) => {
             <option value="tsp">Teaspoon</option>
           </select>
 
-          <label htmlFor="name">Ingredient</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={items.name}
-            onChange={handleChange}
-          />
+          <div className="flex flex-col sm:flex-row w-full">
+            <label htmlFor="name">Ingredient</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={items.name}
+              onChange={handleChange}
+              />
+          </div>
         </div>
-        <button
-          type="submit"
-          className="mx-2 font-extrabold border-2 border-green-500 hover:bg-green-500 text-green-500 hover:text-white p-2 rounded transition-all"
-        >
-          +
-        </button>
+
+        <div className="flex items-end">
+          <button
+            type="submit"
+            className="mx-2 font-extrabold border-2 border-green-500 hover:bg-green-500 text-green-500 hover:text-white p-2 rounded transition-all"
+            onClick={() => setItems(p => ({...p, id: items.id + 1}))}
+            >
+            +
+          </button>
+        </div>
+      </div>
       </form>
 
       <form
         id="step-form"
         onSubmit={stepSubmit}
-        className="flex justify-center"
+        className="flex justify-center bg-stone-300 w-full py-2"
       >
         <div>
-          <label htmlFor="notes">Notes</label>
-          <input
+          <label htmlFor="notes" className="hidden">Notes</label>
+          <textarea
+            className="text-black rounded-md m-1 p-1"
+            rows="4"
+            cols="25"
             type="text"
             name="notes"
             id="notes"
-            value={items.notes}
-            onChange={handleChange}
-          />
+            value={notes.directions}
+            onChange={(e) => setNotes((p) => ({ ...p, directions: e.target.value }))}
+            placeholder="enter your directions here"
+          ></textarea>
         </div>
+        <div className="flex items-end">
         <button
           type="submit"
           className="mx-2 py-1 px-2 font-bold border-2 border-green-600 hover:bg-green-600 text-green-600 hover:text-white rounded-md transition-all"
-        >
+          onClick={() => setDirection(p => [...p, notes.directions])}
+          >
           Add Step
         </button>
+          </div>
       </form>
-        <div> 
-            <ul>
-                {items ? step.map(i => (
-                    <li key={i.name} className='flex'>
-                        <p>{i.amount}</p>
-                        <p>{i.unit}</p>
-                        <p>{i.name}</p>
-                    </li>
-                ))
-                :
-                (<p>enter an ingredient</p>)
-                }
-            </ul>
-        </div>
     </>
   );
 };

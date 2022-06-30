@@ -19,6 +19,7 @@ class Recipe(models.Model):
     cook_unit = models.CharField(max_length=255, default='F')
     notes = models.CharField(max_length=255, blank=True)
     steps = models.JSONField(default=[])
+    directions = models.JSONField(default=[])
 
     def __str__(self):
         return self.name
