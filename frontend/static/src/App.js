@@ -31,7 +31,7 @@ function App() {
 
   return (
     <div className="App">
-      <Nav isAuth={isAuth} />
+      <Nav isAuth={isAuth} setIsAuth={setIsAuth} />
       <div className="flex">
         <Homescreen />
         <Outlet context={[isAuth, setIsAuth, navigate, recipes]} />

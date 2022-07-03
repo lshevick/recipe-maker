@@ -15,6 +15,7 @@ const StepForm = ({ setState, step, setStep }) => {
   // const [step, setStep] = useState([]);
   const [direction, setDirection] = useState([])
   const [notes, setNotes] = useState({
+    id: 0,
     directions: '',
   });
 
@@ -40,7 +41,7 @@ const StepForm = ({ setState, step, setStep }) => {
     // setStep((p) => [...p, items]);
     (step && setState((p) => ({ ...p, steps: step })));
     setState((p) => ({ ...p, directions: direction }));
-    setNotes({directions: ""});
+    setNotes({id: notes.id, directions: ""});
     setItems({
       id: items.id,
       amount: 0,
@@ -48,6 +49,15 @@ const StepForm = ({ setState, step, setStep }) => {
       name: "",
     });
   };
+
+  const removeIngredient = (id) => {
+    console.log(step, 'before filter')
+    // need to finish this function to remove specific items from state
+
+    // step.find(item => item.id === id)
+    setStep([...step].filter(item => item.id !== id))
+    console.log(step, 'after filter')
+  }
 
   return (
     <>
@@ -60,10 +70,11 @@ const StepForm = ({ setState, step, setStep }) => {
           <ul>
             {items ? (
               step.map((i) => (
-                <li key={i.name} className="flex">
+                <li key={i.id} className="flex">
                   <p>{i.amount}</p>
                   <p>{i.unit}</p>
                   <p>{i.name}</p>
+                  <button type="button" onClick={() => removeIngredient()}>-</button>
                 </li>
               ))
             ) : (
@@ -144,7 +155,9 @@ const StepForm = ({ setState, step, setStep }) => {
         <button
           type="submit"
           className="mx-2 py-1 px-2 font-bold border-2 border-green-600 hover:bg-green-600 text-green-600 hover:text-white rounded-md transition-all"
-          onClick={() => setDirection(p => [...p, notes.directions])}
+          onClick={() => {
+            setNotes((p) => ({...p, id: notes.id + 1}))
+            setDirection(p => [...p, notes.directions])}}
           >
           Add Step
         </button>

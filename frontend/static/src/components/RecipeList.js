@@ -23,7 +23,7 @@ const RecipeList = () => {
           <img
             src={recipe.image}
             alt="background recipe"
-            width='100%'
+            width="100%"
             className="object-cover"
           />
         </div>
@@ -46,7 +46,7 @@ const RecipeList = () => {
             <img
               src={recipe.image}
               alt="background recipe"
-              width='100%'
+              width="100%"
               className="object-cover"
             />
           </div>
@@ -60,37 +60,36 @@ const RecipeList = () => {
         <ul className="flex flex-col items-start justify-between">
           <li className="recipe-list p-5 my-2 w-screen flex flex-col items-start overflow-y-hidden overflow-x-scroll flex-nowrap">
             <div className="flex items-center">
-              <h2>Recipes</h2>
-              <hr className="border-t-2 border-solid border-stone-300 w-screen mx-2" />
+              <div className="flex items-center">
+                <h2>Recipes</h2>
+                <hr className="border-t-2 border-solid border-stone-300 w-screen mx-2" />
+              </div>
             </div>
-            <ul className="flex">{recipeList}</ul>
+            <ul className="flex">
+              {isAuth && <li className="recipe-thumbnail w-48 mx-2 h-48 overflow-hidden bg-stone-700 relative flex items-center justify-center">
+                <Link to='/recipe-form' className="flex flex-col items-center">
+                <span className="scale-150 text-3xl text-white">+</span>
+                <p className="text-white">Add Recipe</p>
+                </Link>
+              </li>}
+              {recipeList}
+            </ul>
           </li>
           <li className="recipe-list p-5 my-2 w-screen flex flex-col items-start overflow-y-hidden overflow-x-scroll flex-nowrap">
             <div className="flex items-center">
-              <h2>Public Recipes</h2>
-              <hr className="border-t-2 border-solid border-stone-300 w-screen mx-2" />
+              <div className="flex items-center">
+                <h2>Public Recipes</h2>
+                <hr className="border-t-2 border-solid border-stone-300 w-screen mx-2" />
+              </div>
             </div>
             <ul className="flex">{publicRecipes}</ul>
           </li>
           <li className="recipe-list p-5 my-2 w-screen flex flex-col items-start overflow-y-hidden overflow-x-scroll flex-nowrap">
             <div className="flex items-center">
-              <h2>Public Recipes</h2>
+              <h2>Popular Recipes</h2>
               <hr className="border-t-2 border-solid border-stone-300 w-screen mx-2" />
             </div>
-            <ul className="flex">{publicRecipes}</ul>
-          </li>{" "}
-          <li className="recipe-list p-5 my-2 w-screen flex flex-col items-start overflow-y-hidden overflow-x-scroll flex-nowrap">
-            <div className="flex items-center">
-              <h2>Public Recipes</h2>
-              <hr className="border-t-2 border-solid border-stone-300 w-screen mx-2" />
-            </div>
-            <ul className="flex">{publicRecipes}</ul>
-          </li>{" "}
-          <li className="recipe-list p-5 my-2 w-screen flex flex-col items-start overflow-y-hidden overflow-x-scroll flex-nowrap">
-            <div className="flex items-center">
-              <h2>Public Recipes</h2>
-              <hr className="border-t-2 border-solid border-stone-300 w-screen mx-2" />
-            </div>
+            <div className="flex items-center"></div>
             <ul className="flex">{publicRecipes}</ul>
           </li>
         </ul>
